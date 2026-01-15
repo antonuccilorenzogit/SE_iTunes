@@ -30,9 +30,10 @@ class DAO:
         query = """select t.album_id as album1 , t1.album_id as album2
                     from playlist_track pt, playlist_track pt1, track t, track t1
                     where pt.playlist_id = pt1.playlist_id 
-                    and pt.track_id != pt1.track_id
+                    and pt.track_id < pt1.track_id
                     and t.id = pt.track_id 
                     and t1.id= pt1.track_id	
+                    and t.album_id != t1.album_id
                     and t.album_id in (select a.id
                                         from album a, track t2
                                         where a.id = t2.album_id
